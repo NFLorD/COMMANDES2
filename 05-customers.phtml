@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <title>Customers</title>
+</head>
+<body>
+    <section class="hero is-success is-bold">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">Liste des clients</h1>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <table class="table is-fullwidth">
+                <thead>
+                    <tr>
+                        <th>
+                            <form action="" method="post">
+                                <input id="inputByNumberDirection" name="direction" type="text" style="display:none" value="<?php if ($direction === "ASC") : ?>DESC<?php else : ?>ASC<?php endif ?>">
+                                <input id="inputByNumber" name="order" type="text" style="display:none" value="customerNumber">
+                                <button style="border: none; background: none; font-size: 16px; outline: none;" id="btnByNumber" type="submit">Numéro <i class="fas fa-caret-down"></i></button>
+                            </form>
+                        </th>
+                        <th>
+                            <form action="" method="post">
+                                <input id="inputByCustomerDirection" name="direction" type="text" style="display:none" value="<?php if ($direction === "ASC") : ?>DESC<?php else : ?>ASC<?php endif ?>">
+                                <input id="inputByCustomer" name="order" type="text" style="display:none" value="customerName">
+                                <button style="border: none; background: none; font-size: 16px; outline: none;" id="btnByCustomer" type="submit">Raison sociale <i class="fas fa-caret-down"></i></button>
+                            </form>
+                        </th>
+                        <th>
+                            <form action="" method="post">
+                                <input id="inputByContactDirection" name="direction" type="text" style="display:none" value="<?php if ($direction === "ASC") : ?>DESC<?php else : ?>ASC<?php endif ?>">
+                                <input id="inputByContact" name="order" type="text" style="display:none" value="contactFirstName">
+                                <button style="border: none; background: none; font-size: 16px; outline: none;" id="btnByContact" type="submit">Contact <i class="fas fa-caret-down"></i></button>
+                            </form>
+                        </th>
+                        <th>
+                            <form action="" method="post">
+                                <input id="inputByPhoneDirection" name="direction" type="text" style="display:none" value="<?php if ($direction === "ASC") : ?>DESC<?php else : ?>ASC<?php endif ?>">
+                                <input id="inputByPhone" name="order" type="text" style="display:none" value="phone">
+                                <button style="border: none; background: none; font-size: 16px; outline: none;" id="btnByPhone" type="submit">Téléphone <i class="fas fa-caret-down"></i></button>
+                            </form>
+                        </th>
+                        <th>
+                            <form action="" method="post">
+                                <input id="inputByCityDirection" name="direction" type="text" style="display:none" value="<?php if ($direction === "ASC") : ?>DESC<?php else : ?>ASC<?php endif ?>">
+                                <input id="inputByCity" name="order" type="text" style="display:none" value="city">
+                                <button style="border: none; background: none; font-size: 16px; outline: none;" id="btnByCity" type="submit">Ville <i class="fas fa-caret-down"></i></button>
+                            </form>
+                        </th>
+                        <th>
+                            <form action="" method="post">
+                                <input id="inputByCountryDirection" name="direction" type="text" style="display:none" value="<?php if ($direction === "ASC") : ?>DESC<?php else : ?>ASC<?php endif ?>">
+                                <input id="inputByCountry" name="order" type="text" style="display:none" value="country">
+                                <button style="border: none; background: none; font-size: 16px; outline: none;" id="btnByCountry" type="submit">Pays <i class="fas fa-caret-down"></i></button>
+                            </form>
+                        </th>
+                        <th>
+                            <form action="" method="post">
+                                <input id="inputBySalesRepDirection" name="direction" type="text" style="display:none" value="<?php if ($direction === "ASC") : ?>DESC<?php else : ?>ASC<?php endif ?>">
+                                <input id="inputBySalesRep" name="order" type="text" style="display:none" value="firstName">
+                                <button style="border: none; background: none; font-size: 16px; outline: none;" id="btnBySalesRep" type="submit">Représentant des ventes <i class="fas fa-caret-down"></i></button>
+                            </form>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($data as $obj) : ?>
+                    <tr>
+                        <td><?= $obj['customerNumber'] ?></td>
+                        <td><?= $obj['customerName'] ?></td>
+                        <td><?= $obj['contactFirstName'] . " " . $obj['contactLastName'] ?></td>
+                        <td><?= $obj['phone'] ?></td>
+                        <td><?= $obj['city'] ?></td>
+                        <td><?= $obj['country'] ?></td>
+                        <td><?= $obj['firstName'] . " " . $obj['lastName'] ?></td>
+                    </tr>
+                    <?php endforeach ?>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <script>
+        const directionInputs = document.querySelectorAll("input[name='direction']");
+        const orderInputs = document.querySelectorAll("input[name='order']");
+        const btnsCaret = document.querySelectorAll(":scope input[name='order']+button>i");
+        
+        for(let i = 0; i < btnsCaret.length; i++){
+            if(directionInputs[i].value === "ASC" && orderInputs[i].value === "<?= $order ?>"){
+                btnsCaret[i].classList.remove('fa-caret-down');
+                btnsCaret[i].classList.add('fa-caret-up');
+            } else if (directionInputs[i].value === "DESC" && orderInputs[i].value === "<?= $order ?>"){
+                btnsCaret[i].classList.remove('fa-caret-up');
+                btnsCaret[i].classList.add('fa-caret-down');
+            } else {
+                btnsCaret[i].style.display = "none";
+            }
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  width: 95%;
+  margin: 0 auto;
+}
+
+main {
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+  margin: 0 auto;
+  flex-flow: row wrap;
+}
+
+h1,
+h2,
+h3 {
+  text-align: center;
+  margin-top: 10px;
+}
+
+div {
+  width: 31%;
+  border: 1px solid black;
+  padding: 20px;
+  margin: 10px;
+}
+
+div em {
+  margin-top: 0;
+}
+
+div * {
+  display: block;
+}
+
+div.prices {
+  width: 18%;
+}
+
+div.detailcommande {
+  width: 21%;
+}
+
+main.commandes {
+  width: 70%;
+}
